@@ -1,0 +1,100 @@
+---
+title: "Replicación 1"
+author: "Eduardo Clark"
+date: "5 de octubre de 2018"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(readstata13)
+require(dplyr)
+require(purrr)
+require(texreg)
+require(broom)
+
+```
+
+# 1 Replicación
+
+(1) Congresos. La base original contiene información sobre cuatro Congresos estadounidenses (105to-108vo,de1997-2004).
+Sin embargo,cada modelo se centra en los legisladores de un solo Congreso. 
+Comienza creando 4 bases distintas,una para cada Congreso.  
+
+```{r }
+
+DB <- read.dta13("data/basic.dta") %>% mutate(
+  age2 = age^2, srvlng2 = srvlng^2)
+
+DB.C105 <- filter(DB,congress==105)
+DB.C106 <- filter(DB,congress==106)
+DB.C107 <- filter(DB,congress==107)
+DB.C108 <- filter(DB,congress==108)
+
+```
+
+
+(2) Estadísticas descriptivas
+
+
+(4) Tabla 3 (versión libre). En la Tabla 3, la autora examina en qué medida los resultados varían por género o aliación partidaria. Para eso, corrió cuatro versiones de cada modelo inclui do en la Tabla 2: el primero para el subconjunto de legisladores hombres, el segundo para el subconjunto de legisladoras mujeres, el tercero para los demócratas, y el cuarto para los republicanos.
+
+* (a) Haz una versión más simple de la segunda y tercera columnas de la Tabla 3, incluyendo una interacción entre ngirls y female. ¿Qué indica el coeciente de  ngirls? ¿Cómo puedes calcular el efecto del número de hijas mujeres entre las legisladoras mujeres? ¿Qué tanto dieren tus resultados de los reportados por Washington?
+
+
+
+```{r }
+
+####Tabla3 : 
+# 105 & nowtot
+T3.R1 <- DB %>% split(.$congress) %>%
+  map(~ lm(nowtot ~ ngirls + 
+             as.factor(white) + 
+             as.factor(party) +
+             srvlng + srvlng2 +
+             age + age2 +
+             as.factor(rgroup) +
+             as.factor(region) + 
+             as.factor(totchi) + 
+             demvote +
+             (ngirls*female), 
+           data=DB[DB$congress=="105",])) %>% 
+  map_dfr(tidy) %>% 
+  filter(term=="ngirls" | term=="ngirls:female") %>%
+  arrange(term) %>% 
+  mutate(congress= rep(x=c(105:108),times=2),
+                           source="now") %>%
+  arrange(congress) %>% 
+  select(congress, source, everything()) %>%
+  filter(congress==105)
+
+#  aauw
+T3.R2 <- DB %>% split(.$congress) %>%
+  map(~ lm(aauw ~ ngirls + 
+             as.factor(white) + 
+             as.factor(party) +
+             srvlng + srvlng2 +
+             age + age2 +
+             as.factor(rgroup) +
+             as.factor(region) + 
+             as.factor(totchi) + 
+             demvote +
+             (ngirls*female), 
+           data=.)) %>%
+  map_dfr(tidy) %>% 
+  filter(term=="ngirls" | term=="ngirls:female") %>%
+  arrange(term) %>%
+  mutate(congress= rep(x=c(105:108),times=2),
+                           source="aauw") %>%
+  arrange(congress) %>% 
+  select(congress, source, everything())
+
+T3.1 <- rbind(T3.R1,T3.R2)
+remove(T3.R1,T3.R2)
+
+```
+
+
+
+# Afirmaciones
+

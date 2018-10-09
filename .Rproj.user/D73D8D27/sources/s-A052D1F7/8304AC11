@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538838950414.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "8304AC11",
+    "lastKnownWriteTime" : 1538839206,
+    "last_content_update" : 1538839206032,
+    "path" : "/media/eduardo/HDD/Rprojects/Replicacion1MPA/Tables.R",
+    "project_path" : "Tables.R",
+    "properties" : {
+        "cursorPosition" : "31,23",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

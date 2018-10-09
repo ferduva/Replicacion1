@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{array}
+\newcolumntype{L}{>{\centering\arraybackslash}m{5cm}}
+\newcolumntype{C}{>{\centering\arraybackslash}m{3cm}}
+\usepackage{Sweave}
+\begin{document}
+\input{textables-concordance}
+\setcounter{table}{2}
+\begin{table}
+\caption{Impact of Female Children on Legislator Voting on Women's Issues }
+\begin{center}
+\begin{tabular}{L c C}
+\hline
+\hline
+ & \multicolumn{2}{c}{ } \\
+ Data source & Number of girls & Number of girls:Female legislator\\
+\hline
+NOW, 105\textsuperscript{th} Congress             & $2.65$   & $-3.08$  \\ 
+                   & $(1.08)$      & $(2.47)$ \\
+                   \\
+AAUW, 105\textsuperscript{th} Congress             & $2.53$   & $-1.27$  \\ 
+                   & $(1.17)$      & $(2.68)$ \\
+                   \\
+AAUW, 106\textsuperscript{th} Congress            & $1.12$   & $4.38$  \\ 
+                   & $(1.18)$      & $(2.56)$ \\
+                   \\
+AAUW, 107\textsuperscript{th} Congress             & $2.2$   & $2.27$  \\ 
+                   & $(1.12)$      & $(2.4)$ \\
+                   \\
+AAUW, 108\textsuperscript{th} Congress             & $2.19$   & $1$  \\ 
+                   & $(1.18)$      & $(2.45)$ \\
+                   \\
+
+\hline
+\multicolumn{3}{m{11cm}}{Notes All specifications include legislator race, gender, party, service length (and its square), age (and its square), religion, region and number of children fixed effects, and percent of two-party district votes in favor of the most recent
+Democratic presidential candidate Standard errors in parentheses }
+
+\end{tabular}
+\label{table:coefficients}
+\end{center}
+\end{table}
+
+
+\end{document}
