@@ -2,7 +2,7 @@
 title: "Replicación 1"
 author: "Eduardo Clark"
 date: "5 de octubre de 2018"
-output: word_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -17,84 +17,61 @@ require(broom)
 
 # 1 Replicación
 
-(1) Congresos. La base original contiene información sobre cuatro Congresos estadounidenses (105to-108vo,de1997-2004).
-Sin embargo,cada modelo se centra en los legisladores de un solo Congreso. 
-Comienza creando 4 bases distintas,una para cada Congreso.  
+## (1) Congresos. La base original contiene información sobre cuatro Congresos estadounidenses (105to-108vo,de1997-2004). Sin embargo,cada modelo se centra en los legisladores de un solo Congreso. Comienza creando 4 bases distintas,una para cada Congreso.  
 
-```{r }
-
-DB <- read.dta13("data/basic.dta") %>% mutate(
-  age2 = age^2, srvlng2 = srvlng^2)
-
-DB.C105 <- filter(DB,congress==105)
-DB.C106 <- filter(DB,congress==106)
-DB.C107 <- filter(DB,congress==107)
-DB.C108 <- filter(DB,congress==108)
-
-```
+## (2) Estadísticas descriptivas
 
 
-(2) Estadísticas descriptivas
+## (4) Tabla 3 (versión libre). En la Tabla 3, la autora examina en qué medida los resultados varían por género o aliación partidaria. Para eso, corrió cuatro versiones de cada modelo incluido en la Tabla 2: el primero para el subconjunto de legisladores hombres, el segundo para el subconjunto de legisladoras mujeres, el tercero para los demócratas, y el cuarto para los republicanos.
+
+* **(a) La información sobre el sexo del primer hijo de un subconjunto de 227 legisladores del
+108vo Congreso se encuentra en el archivo genold108.dta. Debes averiguar cómo usar
+la función merge() para unir estos datos con los legisladores del 108vo Congreso en la
+base original.**
 
 
-(4) Tabla 3 (versión libre). En la Tabla 3, la autora examina en qué medida los resultados varían por género o aliación partidaria. Para eso, corrió cuatro versiones de cada modelo inclui do en la Tabla 2: el primero para el subconjunto de legisladores hombres, el segundo para el subconjunto de legisladoras mujeres, el tercero para los demócratas, y el cuarto para los republicanos.
+    - AQUI VA LA TABLA
+
+    - El coeficiente de ngirl representa como cambia el score NOW o AAUW cuando el legislador tiene una hija adicional. Es decir que si el legislador tiene por ejemplo dos hijas mujeres, el score sube 2 * 2.65 en el caso de NOW para la 105 legislatura.
+
+    - Podemos calcular el efecto del número de hijas mujeres al sumar los coeficientes de ngirls y de ngirls:female y multiplicarlos por el número de hijas mujeres. Por ejemplo en el caso de AAUW para la 105 legislatura seria (2.53 -1.27) * el número de hijas.
+
+    - Los resultados son consistentes con Washington, en el sentido qeu tener hijas impact mas a los legisladores hombres en terminos de su mejora de *score* legislativo NOW o AAUW.
+
+* **(b) Repite el ejercicio anterior pero con la aliación partidaria de los legisladores. ¿Qué indica
+el coefciente de ngirls? ¿Cómo puedes calcular el efecto del número de hijas mujeres
+entre los legisladores republicanos? ¿Encuentras diferencias sustantivas respecto a
+los resultados reportados por Washington?**
+
+     - AQUI VA LA TABLA
+
+     - El coeficiente de ngirl representa como cambia el score NOW o AAUW cuando el legislador tiene una hija adicional.
+        
+    - El efecto de número de hijas mujeres en repúblicos se obtiene de multiplicar el coeficiente de ngirls por el número de hijas. Aqui no entra el factor interacción ya que la variable interacción aplica para cuando el legislador es democrata.
+        
+     - Se respeta la misma dirección del texto de Washington, a los repúblicanos les crea un mayor cambio (en terminos de su score NOW y/o AAUW) el tener una hija o una hija adicional.
 
 * (a) Haz una versión más simple de la segunda y tercera columnas de la Tabla 3, incluyendo una interacción entre ngirls y female. ¿Qué indica el coeciente de  ngirls? ¿Cómo puedes calcular el efecto del número de hijas mujeres entre las legisladoras mujeres? ¿Qué tanto dieren tus resultados de los reportados por Washington?
 
+## (5) Crédito extra: Tabla A1. Replica la Tabla 1 del apéndice, que muestra que (para los miembros del 108o Congreso), el sexo del primer hijo determina el número de hijas mujeres, pero no el número total de hijos:
 
+* **(a) La información sobre el sexo del primer hijo de un subconjunto de 227 legisladores del
+108vo Congreso se encuentra en el archivo genold108.dta. Debes averiguar cómo usar
+la función merge() para unir estos datos con los legisladores del 108vo Congreso en la
+base original.**
 
-```{r }
+    - Evidencia en Tables.R
+    
+* **(b) Replica exactamente los resultados de la Tabla A1.**
+    
+    - AQUI VA LA TABLA
+    
+* **(c) Repite el ejercicio pero quitando los controles, i.e. incluyendo únicamente la variable
+First child female como predictor. ¿Observas algún cambio sustantivo?**
 
-####Tabla3 : 
-# 105 & nowtot
-T3.R1 <- DB %>% split(.$congress) %>%
-  map(~ lm(nowtot ~ ngirls + 
-             as.factor(white) + 
-             as.factor(party) +
-             srvlng + srvlng2 +
-             age + age2 +
-             as.factor(rgroup) +
-             as.factor(region) + 
-             as.factor(totchi) + 
-             demvote +
-             (ngirls*female), 
-           data=DB[DB$congress=="105",])) %>% 
-  map_dfr(tidy) %>% 
-  filter(term=="ngirls" | term=="ngirls:female") %>%
-  arrange(term) %>% 
-  mutate(congress= rep(x=c(105:108),times=2),
-                           source="now") %>%
-  arrange(congress) %>% 
-  select(congress, source, everything()) %>%
-  filter(congress==105)
-
-#  aauw
-T3.R2 <- DB %>% split(.$congress) %>%
-  map(~ lm(aauw ~ ngirls + 
-             as.factor(white) + 
-             as.factor(party) +
-             srvlng + srvlng2 +
-             age + age2 +
-             as.factor(rgroup) +
-             as.factor(region) + 
-             as.factor(totchi) + 
-             demvote +
-             (ngirls*female), 
-           data=.)) %>%
-  map_dfr(tidy) %>% 
-  filter(term=="ngirls" | term=="ngirls:female") %>%
-  arrange(term) %>%
-  mutate(congress= rep(x=c(105:108),times=2),
-                           source="aauw") %>%
-  arrange(congress) %>% 
-  select(congress, source, everything())
-
-T3.1 <- rbind(T3.R1,T3.R2)
-remove(T3.R1,T3.R2)
-
-```
-
-
+    - AQUI VA LA TABLA
+    
+    - Hay un cambio del doble en el número de hijos para el congreso en general, pero es muy pequeño el coeficiente. En general se observa practicamente lo mismo
 
 # Afirmaciones
 

@@ -2,6 +2,7 @@
 \usepackage{array}
 \newcolumntype{L}{>{\centering\arraybackslash}m{5cm}}
 \newcolumntype{C}{>{\centering\arraybackslash}m{3cm}}
+\newcolumntype{R}{>{\centering\arraybackslash}c{3cm}}
 \usepackage{Sweave}
 \begin{document}
 \input{textables-concordance}
@@ -9,7 +10,8 @@
 \begin{table}
 \caption{Impact of Female Children on Legislator Voting on Women's Issues }
 \begin{center}
-\begin{tabular}{L c C}
+\begin{tabular}{L c C} 
+\multicolumn{3}{c}{\textit{Each row represents the coefficient from a different regression  }} \\
 \hline
 \hline
  & \multicolumn{2}{c}{ } \\
@@ -32,13 +34,151 @@ AAUW, 108\textsuperscript{th} Congress             & $2.19$   & $1$  \\
                    \\
 
 \hline
-\multicolumn{3}{m{11cm}}{Notes All specifications include legislator race, gender, party, service length (and its square), age (and its square), religion, region and number of children fixed effects, and percent of two-party district votes in favor of the most recent
-Democratic presidential candidate Standard errors in parentheses }
+\multicolumn{3}{m{11cm}}{Notes: All specifications include legislator race, gender, party, service length (and its square), age (and its square), religion, region and number of children fixed effects, and percent of two-party district votes in favor of the most recent
+Democratic presidential candidate. Standard errors in parentheses }
 
 \end{tabular}
 \label{table:coefficients}
 \end{center}
 \end{table}
+
+\begin{table}
+\caption{Impact of Female Children on Legislator Voting on Women's Issues by legislator party }
+\begin{center}
+\begin{tabular}{L c C} 
+\multicolumn{3}{c}{\textit{Each row represents the coefficient from a different regression  }} \\
+\hline
+\hline
+ & \multicolumn{2}{c}{ } \\
+ Data source & Number of girls & Number of girls:Legislator party\\
+\hline
+NOW, 105\textsuperscript{th} Congress             & $2.40$   & $-0.29$  \\ 
+                   & $(1.28)$      & $(1.51)$ \\
+                   \\
+AAUW, 105\textsuperscript{th} Congress             & $3.67$   & $-2.74$  \\ 
+                   & $(1.39)$      & $(1.63)$ \\
+                   \\
+AAUW, 106\textsuperscript{th} Congress            & $2.75$   & $-2.22$  \\ 
+                   & $(1.41)$      & $(1.70)$ \\
+                   \\
+AAUW, 107\textsuperscript{th} Congress             & $3.51$   & $-1.87$  \\ 
+                   & $(1.37)$      & $(1.6)$ \\
+                   \\
+AAUW, 108\textsuperscript{th} Congress             & $3.36$   & $1.43$  \\ 
+                   & $(1.43)$      & $(1.72)$ \\
+                   \\
+
+\hline
+\multicolumn{3}{m{11cm}}{Notes: All specifications include legislator race, gender, party, service length (and its square), age (and its square), religion, region and number of children fixed effects, and percent of two-party district votes in favor of the most recent
+Democratic presidential candidate. Standard errors in parentheses }
+
+\end{tabular}
+\label{table:coefficients}
+\end{center}
+\end{table}
+
+\setcounter{table}{0}
+\begin{table}
+\caption{Evidence on Legislator Child Gender Mix Selection, 108th Congress  }
+\begin{center}
+\begin{tabular}{l c c c c c c } 
+\hline
+\hline
+  & \multicolumn{2}{c}{ Full congress}  & \multicolumn{2}{c}{ Democrats} & \multicolumn{2}{c}{ Republicans}\\
+  
+  & Daughters & Children & Daughters & Children & Daughters & Children \\
+  
+\hline
+
+First child & 1.36 & -0.084 & 1.40 & 0.08 & 1.23 & -0.28 \\
+
+daughter & (0.09) & (0.15) & (0.11) & (0.18) & (0.11) & (0.23) \\
+
+N & 227 & 227 & 105 & 105 & 122 & 122 \\
+
+\hline
+
+\multicolumn{7}{m{13cm}}{Notes: The sample includes the 227 of the 381 parent members of the 108th Congress, for whom gender of the first born could be established Number of children regressions include controls for legislator race, gender, party, age, age squared, service length and its square, religion, and region Number of daughters regressions include the preceding covariates, as well as fixed effects for total number of children Standard errors in parentheses  }
+
+\end{tabular}
+\label{table:coefficients}
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Evidence on Legislator Child Gender Mix Selection, 108th Congress (no controls)  }
+\begin{center}
+\begin{tabular}{l c c c c c c } 
+\hline
+\hline
+  & \multicolumn{2}{c}{ Full congress}  & \multicolumn{2}{c}{ Democrats} & \multicolumn{2}{c}{ Republicans}\\
+  
+  & Daughters & Children & Daughters & Children & Daughters & Children \\
+  
+\hline
+
+First child & 1.30 & -0.15 & 1.46 & 0.09 & 1.2 &-0.26 \\
+
+daughter & (0.12) & (0.15) & (0.16) & (0.17) & (0.18) & (0.23) \\
+
+N & 227 & 227 & 105 & 105 & 122 & 122 \\
+
+\hline
+
+\multicolumn{7}{m{13cm}}{Notes: The sample includes the 227 of the 381 parent members of the 108th Congress. Standard errors in parentheses  }
+
+\end{tabular}
+\label{table:coefficients}
+\end{center}
+\end{table}
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: jue, oct 11, 2018 - 17:53:45
+\begin{table}[!htbp] \centering 
+  \caption{Predicting number of children} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{Total Children} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ Independent & 0.535$$ &  &  \\ 
+  & (0.076) &  &  \\ 
+  & & & \\ 
+ Republican & 0.834 &  &  \\ 
+  & (0.651) &  &  \\ 
+  & & & \\ 
+ AAUW Score &  & $-$0.008$$ &  \\ 
+  &  & (0.001) &  \\ 
+  & & & \\ 
+Relion Group 1 &  &  & 1.470$$ \\ 
+  &  &  & (0.328) \\ 
+  & & & \\ 
+ Relion Group 2 &  &  & 1.240$$ \\ 
+  &  &  & (0.332) \\ 
+  & & & \\ 
+ Relion Group 3 &  &  & 2.401$$ \\ 
+  &  &  & (0.375) \\ 
+  & & & \\ 
+ Relion Group 4 &  &  & 1.198$$ \\ 
+  &  &  & (0.361) \\ 
+  & & & \\ 
+ Constant & 2.166$$ & 2.814$$ & 1.042$$ \\ 
+  & (0.055) & (0.057) & (0.324) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 1,736 & 1,735 & 1,736 \\ 
+R$^{2}$ & 0.028 & 0.041 & 0.031 \\ 
+Adjusted R$^{2}$ & 0.027 & 0.040 & 0.029 \\ 
+Residual Std. Error & 1.589 (df = 1733) & 1.576 (df = 1733) & 1.587 (df = 1731) \\ 
+F Statistic & 24.808$$ (df = 2; 1733) & 73.798$$ (df = 1; 1733) & 13.839$$ (df = 4; 1731) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 
 
 \end{document}
